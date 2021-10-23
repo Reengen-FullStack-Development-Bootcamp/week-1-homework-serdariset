@@ -45,6 +45,7 @@
                 ></i>
               </div>
             </div>
+            <div class="dropdownItem"><span>Total Product: <b>{{totalQuantity}}</b></span> <span>Total Price: <b>{{totalPrice}} $</b></span></div>
           </div>
           <div class="dropdownCont" v-else>Your cart is empty</div>
         </div>
@@ -121,6 +122,22 @@ export default {
       productBasket: [],
       quantity: 1,
     };
+  },
+  computed:{
+    totalQuantity(){
+        let total = 0;
+        for (let index = 0; index<this.productBasket.length; index++){
+          total += this.productBasket[index].count
+        }
+      return total
+    },
+    totalPrice(){
+      let price = 0;
+      for(let index = 0; index< this.productBasket.length; index++){
+        price += this.productBasket[index][2] * this.productBasket[index].count
+      }
+      return price
+    }
   },
  
   methods: {
